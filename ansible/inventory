@@ -1,0 +1,7 @@
+[staging_servers]
+host0 ansible_host=192.168.1.10 ansible_port=22 ansible_user=vagrant ansible_private_key_file=/home/user/.ssh/staging owner=Ivan
+
+[prod_servers]
+host1 ansible_host=192.168.1.11 owner=Petya
+host2 ansible_host=192.168.1.12 owner=Vasya
+

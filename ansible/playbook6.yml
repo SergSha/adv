@@ -1,0 +1,32 @@
+---
+- name: Loops Playbook
+  hosts: host1
+  become: yes
+
+  tasks:
+  - name: Say Hello to All
+    debug: msg="Hello, {{ item }}"
+    loop:   # для nsible 2.4 и ниже with_item, 2.5 и выше - loop 
+      - "Vasya"
+      - "Petya"
+      - "Masha"
+      - "Olya"
+
+  - name: Loop Until example
+    shell: echo -n Z >> myfile.txt && cat ./myfile.txt
+    register: output  # Сохраняем результат в переменную output
+    delay: 2          # Задержка 2 секунды
+    retries: 10       # 10 повторений (по умолчанию 3 раза)
+    until: output.stdout.find("ZZZZ") == false
+
+  - name: Print Final Output
+    debug:
+      var: output.stdout
+
+#  - name: Install many packages
+#    yum: name={{ item }} state=installed
+#    loop:
+#      - python
+#      - tree
+#      - mysql-client
+
